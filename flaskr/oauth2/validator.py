@@ -55,18 +55,16 @@ class Validator(RequestValidator):
         client_id, client_secret = self._get_client_creds_from_request(request)
         logger.debug(f'Authenticate client {client_id}')
 
-        if not client := self._clientgetter(client_id):
-            logger.debug('Authenticate client failed, client not found.')
-            return False
+        if client := self._clientgetter(client_id):
+            request.client = client
+            if hasattr(client, 'client_secret') and client.client_secret != client_secret:
+                logger.debug('Authenticate client failed, secret not match.')
+                return False
+            logger.debug('Authenticate client success.')
+            return True
 
-        request.client = client
-
-        if hasattr(client, 'client_secret') and client.client_secret != client_secret:
-            logger.debug('Authenticate client failed, secret not match.')
-            return False
-
-        logger.debug('Authenticate client success.')
-        return True
+        logger.debug('Authenticate client failed, client not found.')
+        return False
 
     def authenticate_client_id(self, client_id, request, *args, **kwargs):
         if client_id is None:

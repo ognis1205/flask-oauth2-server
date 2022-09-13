@@ -18,6 +18,9 @@ def create_app():
 
     app.config.from_pyfile('config.py')
 
+    from flaskr.oauth2.ext import oauth2
+    oauth2.init_app(app)
+
     from flaskr.models.ext import db, migrate
     db.init_app(app)
     migrate.init_app(app, db)
