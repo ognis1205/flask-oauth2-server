@@ -1,6 +1,6 @@
 import logging
 from functools import wraps
-from flask import url_for, redirect, request, Response
+from flask import url_for, redirect, request, Response, abort
 from werkzeug.utils import import_string, cached_property
 from oauthlib import oauth2
 from oauthlib.oauth2 import Server

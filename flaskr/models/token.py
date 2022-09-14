@@ -2,7 +2,7 @@ from flaskr.models.ext import db
 
 
 class Token(db.Model):
-    __tabelname__ = 'clients'
+    __tabelname__ = 'token'
 
     __table_args__ = {
         'extend_existing': True,
@@ -11,7 +11,8 @@ class Token(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     client_id = db.Column(
-        db.String(64), db.ForeignKey('client.client_id'),
+        db.String(64),
+        db.ForeignKey('client.client_id'),
         nullable=False,
     )
 

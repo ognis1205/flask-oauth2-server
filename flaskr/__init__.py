@@ -8,6 +8,8 @@ def create_app():
     app = Flask(
         __name__,
         instance_relative_config=True,
+        static_folder='static',
+        template_folder='templates',
     )
 
     app.config.from_object({
@@ -24,5 +26,11 @@ def create_app():
     from flaskr.models.ext import db, migrate
     db.init_app(app)
     migrate.init_app(app, db)
+
+    from flaskr.routes.main import bp as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    from flaskr.routes.oauth import bp as oauth_blueprint
+    app.register_blueprint(oauth_blueprint)
 
     return app

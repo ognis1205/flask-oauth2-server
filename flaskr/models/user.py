@@ -2,7 +2,7 @@ from flaskr.models.ext import db
 
 
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
 
     __table_args__ = {
         'extend_existing': True,

@@ -2,7 +2,7 @@ from flaskr.models.ext import db
 
 
 class Grant(db.Model):
-    __tabelname__ = 'grants'
+    __tabelname__ = 'grant'
 
     __table_args__ = {
         'extend_existing': True,

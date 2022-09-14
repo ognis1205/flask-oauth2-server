@@ -2,7 +2,7 @@ from flaskr.models.ext import db
 
 
 class Client(db.Model):
-    __tabelname__ = 'clients'
+    __tabelname__ = 'client'
 
     __table_args__ = {
         'extend_existing': True,
